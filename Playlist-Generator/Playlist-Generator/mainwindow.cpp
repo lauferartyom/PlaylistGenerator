@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "filter.h"
+#include <stdlib.h>
+#include<QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,11 +35,25 @@ void MainWindow::on_importButton_clicked()
 
 void MainWindow::on_generateButton_clicked()
 {
+    int _val = ui->spinBox->value();
+    //QString val = ui->spinBox->text();
+    qInfo() << _val;
     if(ui->listImport->count() == 0)
         return;
-    for(int i = 0;i<10;++i) {
-    QListWidgetItem *widget = ui->listImport->takeItem(ui->listImport->currentRow());
-    ui->listGenerate->addItem(widget);
+
+    srand(2412);
+
+    for(int i = 0;i<_val;++i) {
+        int r_num = rand();
+        //qInfo() << r_num % 10;
+        QListWidgetItem *widget = ui->listImport->takeItem(ui->listImport->currentRow());
+        if((r_num%10) > 5){
+            //QListWidgetItem *widget = ui->listImport->takeItem(ui->listImport->currentRow());
+            ui->listGenerate->addItem(widget);
+        }else{
+            ui->listImport->addItem(widget);
+            i--;
+        }
     }
 }
 
@@ -66,4 +82,3 @@ void MainWindow::on_filterButton_clicked()
     filter = new Filter(this);
     filter->show();
 }
-

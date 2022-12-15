@@ -12,3 +12,9 @@ Filter::~Filter()
 {
     delete ui;
 }
+
+void Filter::on_fsaveButton_clicked()
+{
+    QWidget::close();
+}
+

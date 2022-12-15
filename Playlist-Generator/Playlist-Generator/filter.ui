@@ -620,54 +620,43 @@
     </property>
    </widget>
   </widget>
-  <widget class="QRadioButton" name="radioButton">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
+  <widget class="QCheckBox" name="checkBox">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>70</y>
-     <width>151</width>
-     <height>31</height>
+     <y>80</y>
+     <width>83</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
-     <italic>true</italic>
-     <bold>true</bold>
-    </font>
-   </property>
    <property name="text">
-    <string> keyword</string>
+    <string>keyword</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_2">
+  <widget class="QCheckBox" name="checkBox_2">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>150</y>
-     <width>151</width>
-     <height>31</height>
+     <y>160</y>
+     <width>83</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string> artist</string>
+    <string>artist</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_3">
+  <widget class="QCheckBox" name="checkBox_3">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>230</y>
-     <width>151</width>
-     <height>31</height>
+     <y>240</y>
+     <width>83</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string> genre</string>
+    <string>genre</string>
    </property>
   </widget>
  </widget>
