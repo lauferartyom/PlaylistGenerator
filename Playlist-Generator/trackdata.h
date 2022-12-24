@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QtMultimedia/QMediaMetaData>
+#include <QtMultimedia/QMediaPlayer>
 
 class TrackData
 {
@@ -11,6 +12,8 @@ public:
     QString genre;
     double sizeTrack;
     TrackData();
+private:
+
 };
 
 #endif // TRACKDATA_H

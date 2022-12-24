@@ -33,15 +33,14 @@ void MainWindow::on_importButton_clicked()
     QStringList dirContent = dir.entryList();
 
     ui->listImport->clear();
-    int size = 0;
 
     for (QString finfo: dirContent) {
         QString name = finfo;
         QFileInfo file(filePath + "//" + name);
         TrackData trackdata;
         trackdata.sizeTrack = file.size()/1048576;
-        //
-        //QString atristName = finfo.;
+        trackdata.artist = getMediaData(filePath + "//" + name);
+        qInfo() << trackdata.artist;
         TrackMap.insert(name, trackdata);
         QListWidgetItem * item = new QListWidgetItem(name);
             ui->listImport->addItem(item);
@@ -178,10 +177,16 @@ void MainWindow::on_saveButton_clicked()
     }
 }
 
-
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     ui->memoryLabel->setText(QString::number(value)+"GB");
 }
 
+QString MainWindow::getMediaData(QString track) {
+    m_player = new QMediaPlayer(this);
+    m_player->setSource(QUrl(track));
+    QString artist = m_player->metaData().stringValue(QMediaMetaData::AlbumArtist);
+    return artist;
+
+}
 

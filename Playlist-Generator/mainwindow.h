@@ -15,6 +15,7 @@
 #include <filter.h>
 #include <QMap>
 #include <trackdata.h>
+#include <QtMultimedia/QMediaPlayer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +28,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QString getMediaData(QString filename);
 
 private slots:
     void on_importButton_clicked();
@@ -48,7 +50,10 @@ private slots:
     void on_horizontalSlider_valueChanged(int value);
 
 
+
+
 private:
+    QMediaPlayer *m_player;
     QMap<QString,TrackData> TrackMap;
     QString importFilePath;
     Ui::MainWindow *ui;
