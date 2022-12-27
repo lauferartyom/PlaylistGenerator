@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->deleteButton->setEnabled(false);
     ui->generateButton->setEnabled(false);
     ui->saveButton->setEnabled(false);
+    ui->playlistMemory->setNum(0);
 }
 
 MainWindow::~MainWindow()
@@ -75,19 +76,29 @@ void MainWindow::on_generateButton_clicked()
         memory = 0;
     }
 
-
-
     if(ui->listImport->count() == 0)
     return;
 
-    srand(2412);
-    double size1 = 0;
-    if(count == 0) {
-        for(auto[key, value]: TrackMap.asKeyValueRange()) {
-            if(size1 < memory) {
-                QListWidgetItem *widget = ui->listImport->takeItem(ui->listImport->currentRow());
+
+    if(filter.keyword != nullptr) {
+        if(count !=0)
+        for(auto [key, value]: TrackMap.asKeyValueRange()) {
+            if(key.contains(filter.keyword, Qt::CaseInsensitive)) {
+                QListWidgetItem *widget = ui->listImport->takeItem(ui->listGenerate->currentRow());
                 ui->listGenerate->addItem(widget);
-                size1 += value.sizeTrack;
+            }
+        }
+    }
+    else {
+        srand(2412);
+        double size1 = 0;
+        if(count == 0) {
+            for(auto[key, value]: TrackMap.asKeyValueRange()) {
+                if(size1 < memory) {
+                    QListWidgetItem *widget = ui->listImport->takeItem(ui->listImport->currentRow());
+                    ui->listGenerate->addItem(widget);
+                    size1 += value.sizeTrack;
+                }
             }
         }
     }
@@ -114,6 +125,8 @@ void MainWindow::on_generateButton_clicked()
     if(ui->listGenerate->count() == 0) {
         ui->saveButton->setEnabled(false);
     }
+
+    ui->playlistMemory->setNum(ui->listGenerate->count());
 }
 
 
@@ -127,6 +140,8 @@ void MainWindow::on_addButton_clicked()
     if(ui->listGenerate->count() != 0) {
         ui->saveButton->setEnabled(true);
     }
+
+    ui->playlistMemory->setNum(ui->listGenerate->count());
 }
 
 
@@ -140,6 +155,8 @@ void MainWindow::on_deleteButton_clicked()
     if(ui->listGenerate->count() == 0) {
         ui->saveButton->setEnabled(false);
     }
+
+    ui->playlistMemory->setNum(ui->listGenerate->count());
 }
 
 
@@ -189,4 +206,5 @@ QString MainWindow::getMediaData(QString track) {
     return artist;
 
 }
+
 
